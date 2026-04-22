@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="theme-color" content="#1F4D3F" />
+<title>Woofinder — Localizá perros. Conectá personas.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="device">
+    <div class="device-notch" aria-hidden="true"></div>
+ 
+    <!-- ============ WELCOME ============ -->
+    <section class="screen screen--welcome is-active" data-screen="welcome">
+      <div class="welcome__bg" aria-hidden="true">
+        <div class="welcome__blob welcome__blob--1"></div>
+        <div class="welcome__blob welcome__blob--2"></div>
+        <div class="welcome__blob welcome__blob--3"></div>
+      </div>
+      <div class="welcome__inner">
+        <div class="welcome__logo" aria-hidden="true">
+          <svg viewBox="0 0 64 64" width="64" height="64">
+            <circle cx="32" cy="36" r="18" fill="#F5E7D3"/>
+            <circle cx="24" cy="34" r="2.2" fill="#1F4D3F"/>
+            <circle cx="40" cy="34" r="2.2" fill="#1F4D3F"/>
+            <path d="M28 42c1.5 2 6.5 2 8 0" stroke="#1F4D3F" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <ellipse cx="32" cy="40" rx="2.4" ry="1.6" fill="#C06E52"/>
+            <ellipse cx="18" cy="22" rx="5" ry="7" fill="#F5E7D3" transform="rotate(-18 18 22)"/>
+            <ellipse cx="46" cy="22" rx="5" ry="7" fill="#F5E7D3" transform="rotate(18 46 22)"/>
+          </svg>
+        </div>
+        <h1 class="welcome__title">Woofinder</h1>
+        <p class="welcome__tagline">Localizá perros.<br/>Conectá personas.</p>
+        <div class="welcome__meta">
+          <span class="chip"><span class="chip__dot"></span>Comunidad local</span>
+          <span class="chip"><span class="chip__dot chip__dot--terracotta"></span>Paseos reales</span>
+        </div>
+        <div class="welcome__actions">
+          <button class="btn btn--primary" data-go="home">Crear cuenta</button>
+          <button class="btn btn--ghost" data-go="home">Iniciar sesión</button>
+        </div>
+        <p class="welcome__legal">Al continuar aceptás los Términos y la Política de privacidad.</p>
+      </div>
+    </section>
+ 
+    <!-- ============ HOME / MAP ============ -->
+    <section class="screen screen--map" data-screen="home">
+      <header class="topbar topbar--map">
+        <button class="icon-btn" aria-label="Menú">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <div class="searchbar" data-go="explore">
+          <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>Buscar perros cerca…</span>
+        </div>
+        <button class="icon-btn" aria-label="Filtros" data-open="filters">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </header>
+ 
+      <div class="map">
+        <svg class="map__canvas" viewBox="0 0 375 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+              <path d="M 28 0 L 0 0 0 28" fill="none" stroke="#E7DCC8" stroke-width="1"/>
+            </pattern>
+          </defs>
+          <rect width="375" height="640" fill="#F5ECD9"/>
+          <rect width="375" height="640" fill="url(#grid)"/>
+          <!-- park blobs -->
+          <path d="M-20 380 Q 60 300 160 360 T 400 380 L 400 640 L -20 640 Z" fill="#CFE0C3" opacity="0.75"/>
+          <path d="M 40 120 Q 140 80 240 140 Q 320 180 380 120 L 400 0 L 0 0 Z" fill="#E3EAD5" opacity="0.7"/>
+          <circle cx="80" cy="260" r="44" fill="#CFE0C3" opacity="0.6"/>
+          <circle cx="300" cy="250" r="36" fill="#CFE0C3" opacity="0.6"/>
+          <!-- streets -->
+          <path d="M0 320 L 375 300" stroke="#EADFCB" stroke-width="10"/>
+          <path d="M140 0 L 160 640" stroke="#EADFCB" stroke-width="8"/>
+          <path d="M0 480 L 375 500" stroke="#EADFCB" stroke-width="6"/>
+        </svg>
+ 
+        <!-- Pins -->
+        <button class="pin" style="top:28%; left:22%;" data-go="profile" aria-label="Luna, Labrador">
+          <span class="pin__avatar" style="background:linear-gradient(135deg,#F1C48A,#C68B5A)">🐕</span>
+          <span class="pin__tail"></span>
+        </button>
+        <button class="pin" style="top:44%; left:62%;" data-go="profile" aria-label="Toto, Beagle">
+          <span class="pin__avatar" style="background:linear-gradient(135deg,#E8D3B1,#A97B52)">🐶</span>
+          <span class="pin__tail"></span>
+        </button>
+        <button class="pin" style="top:58%; left:34%;" data-go="profile" aria-label="Nala, Border Collie">
+          <span class="pin__avatar" style="background:linear-gradient(135deg,#2F6F5A,#1F4D3F);color:#fff">🐾</span>
+          <span class="pin__tail"></span>
+        </button>
+        <button class="pin pin--accent" style="top:70%; left:72%;" data-go="profile" aria-label="Mateo, Golden">
+          <span class="pin__avatar" style="background:linear-gradient(135deg,#F1C48A,#C06E52);color:#fff">🐕‍🦺</span>
+          <span class="pin__tail"></span>
+        </button>
+ 
+        <!-- Me dot -->
+        <div class="me-dot" style="top:52%; left:48%;" aria-hidden="true">
+          <span class="me-dot__ping"></span>
+          <span class="me-dot__core"></span>
+        </div>
+ 
+        <!-- Floating chip -->
+        <div class="map__chip">
+          <span>📍 Palermo, CABA</span>
+          <span class="map__chip-count">12 cerca</span>
+        </div>
+ 
+        <!-- Peek card -->
+        <div class="peek" data-go="profile">
+          <div class="peek__avatar" style="background:linear-gradient(135deg,#F1C48A,#C06E52)">🐕</div>
+          <div class="peek__body">
+            <div class="peek__row">
+              <strong>Luna</strong>
+              <span class="tag tag--green">Activo</span>
+            </div>
+            <p class="peek__meta">Labrador · 3 años · a 180 m</p>
+          </div>
+          <button class="btn btn--mini" data-go="invite" data-stop>Invitar</button>
+        </div>
+      </div>
+ 
+      <nav class="tabbar">
+        <button class="tabbar__item" data-go="home"><span class="tabbar__icon">🏠</span><span>Inicio</span></button>
+        <button class="tabbar__item" data-go="explore"><span class="tabbar__icon">🧭</span><span>Explorar</span></button>
+        <button class="tabbar__item is-active" data-go="home"><span class="tabbar__icon tabbar__icon--big">📍</span><span>Mapa</span></button>
+        <button class="tabbar__item" data-go="chat"><span class="tabbar__icon">💬</span><span>Chat</span></button>
+        <button class="tabbar__item" data-go="profile"><span class="tabbar__icon">👤</span><span>Perfil</span></button>
+      </nav>
+    </section>
+ 
+    <!-- ============ EXPLORE ============ -->
+    <section class="screen screen--explore" data-screen="explore">
+      <header class="topbar">
+        <button class="icon-btn" data-go="home" aria-label="Volver">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <h2 class="topbar__title">Explorar</h2>
+        <button class="icon-btn" aria-label="Filtros" data-open="filters">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </header>
+ 
+      <div class="explore__head">
+        <div class="searchbar searchbar--inline">
+          <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>Buscar por raza, nombre…</span>
+        </div>
+        <div class="pill-row">
+          <button class="pill is-active">Cerca</button>
+          <button class="pill">Popular</button>
+          <button class="pill">Nuevo</button>
+          <button class="pill" data-open="filters">＋ Filtros</button>
+        </div>
+      </div>
+ 
+      <div class="explore__list">
+        <article class="card" data-go="profile">
+          <div class="card__avatar" style="background:linear-gradient(135deg,#F1C48A,#C06E52)">🐕</div>
+          <div class="card__body">
+            <div class="card__row">
+              <strong>Luna</strong>
+              <span class="card__distance">180 m</span>
+            </div>
+            <p class="card__meta">Labrador · 3 años</p>
+            <div class="card__tags">
+              <span class="tag tag--green">Activa</span>
+              <span class="tag tag--sand">Sociable</span>
+            </div>
+          </div>
+          <button class="btn btn--pill" data-go="invite" data-stop>Conectar</button>
+        </article>
+ 
+        <article class="card" data-go="profile">
+          <div class="card__avatar" style="background:linear-gradient(135deg,#E8D3B1,#A97B52)">🐶</div>
+          <div class="card__body">
+            <div class="card__row">
+              <strong>Toto</strong>
+              <span class="card__distance">320 m</span>
+            </div>
+            <p class="card__meta">Beagle · 2 años</p>
+            <div class="card__tags">
+              <span class="tag tag--sand">Tranquilo</span>
+              <span class="tag tag--sand">Curioso</span>
+            </div>
+          </div>
+          <button class="btn btn--pill" data-go="invite" data-stop>Conectar</button>
+        </article>
+ 
+        <article class="card" data-go="profile">
+          <div class="card__avatar" style="background:linear-gradient(135deg,#2F6F5A,#1F4D3F);color:#fff">🐾</div>
+          <div class="card__body">
+            <div class="card__row">
+              <strong>Nala</strong>
+              <span class="card__distance">450 m</span>
+            </div>
+            <p class="card__meta">Border Collie · 4 años</p>
+            <div class="card__tags">
+              <span class="tag tag--green">Muy activa</span>
+              <span class="tag tag--terracotta">Entrenada</span>
+            </div>
+          </div>
+          <button class="btn btn--pill" data-go="invite" data-stop>Conectar</button>
+        </article>
+ 
+        <article class="card" data-go="profile">
+          <div class="card__avatar" style="background:linear-gradient(135deg,#F1C48A,#C06E52);color:#fff">🐕‍🦺</div>
+          <div class="card__body">
+            <div class="card__row">
+              <strong>Mateo</strong>
+              <span class="card__distance">620 m</span>
+            </div>
+            <p class="card__meta">Golden · 5 años</p>
+            <div class="card__tags">
+              <span class="tag tag--green">Activo</span>
+              <span class="tag tag--sand">Familiar</span>
+            </div>
+          </div>
+          <button class="btn btn--pill" data-go="invite" data-stop>Conectar</button>
+        </article>
+ 
+        <article class="card" data-go="profile">
+          <div class="card__avatar" style="background:linear-gradient(135deg,#D9C7A4,#8F6A44)">🐩</div>
+          <div class="card__body">
+            <div class="card__row">
+              <strong>Coco</strong>
+              <span class="card__distance">800 m</span>
+            </div>
+            <p class="card__meta">Caniche · 6 años</p>
+            <div class="card__tags">
+              <span class="tag tag--sand">Tranquilo</span>
+            </div>
+          </div>
+          <button class="btn btn--pill" data-go="invite" data-stop>Conectar</button>
+        </article>
+      </div>
+ 
+      <nav class="tabbar">
+        <button class="tabbar__item" data-go="home"><span class="tabbar__icon">🏠</span><span>Inicio</span></button>
+        <button class="tabbar__item is-active" data-go="explore"><span class="tabbar__icon">🧭</span><span>Explorar</span></button>
+        <button class="tabbar__item" data-go="home"><span class="tabbar__icon">📍</span><span>Mapa</span></button>
+        <button class="tabbar__item" data-go="chat"><span class="tabbar__icon">💬</span><span>Chat</span></button>
+        <button class="tabbar__item" data-go="profile"><span class="tabbar__icon">👤</span><span>Perfil</span></button>
+      </nav>
+    </section>
+ 
+    <!-- ============ PROFILE ============ -->
+    <section class="screen screen--profile" data-screen="profile">
+      <div class="profile__hero">
+        <div class="profile__hero-bg"></div>
+        <header class="topbar topbar--over">
+          <button class="icon-btn icon-btn--over" data-back aria-label="Volver">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="icon-btn icon-btn--over" aria-label="Compartir">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 4v12m0-12l-4 4m4-4l4 4M5 20h14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </header>
+        <div class="profile__avatar" style="background:linear-gradient(135deg,#F1C48A,#C06E52)">🐕</div>
+      </div>
+ 
+      <div class="profile__body">
+        <div class="profile__headline">
+          <h2>Luna</h2>
+          <span class="profile__distance">📍 180 m</span>
+        </div>
+        <p class="profile__sub">Labrador · 3 años · Hembra</p>
+ 
+        <div class="profile__traits">
+          <span class="tag tag--green">Activa</span>
+          <span class="tag tag--sand">Sociable</span>
+          <span class="tag tag--terracotta">Ama el agua</span>
+        </div>
+ 
+        <section class="profile__section">
+          <h3>Sobre Luna</h3>
+          <p>Luna ama las mañanas en el parque y correr detrás de pelotas. Se lleva bien con perros de todos los tamaños.</p>
+        </section>
+ 
+        <section class="profile__section">
+          <h3>Su humano</h3>
+          <div class="owner">
+            <div class="owner__avatar">SM</div>
+            <div>
+              <strong>Sofía M.</strong>
+              <p class="owner__meta">⭐ 4.9 · 23 paseos · Palermo</p>
+            </div>
+          </div>
+        </section>
+ 
+        <section class="profile__section">
+          <h3>Parques favoritos</h3>
+          <div class="chip-row">
+            <span class="chip chip--soft">🌳 Parque Las Heras</span>
+            <span class="chip chip--soft">🌿 Bosques de Palermo</span>
+          </div>
+        </section>
+ 
+        <div class="profile__spacer"></div>
+      </div>
+ 
+      <div class="profile__cta">
+        <button class="btn btn--ghost btn--half" data-go="chat">Conectar</button>
+        <button class="btn btn--primary btn--half" data-go="invite">Invitar a paseo</button>
+      </div>
+    </section>
+ 
+    <!-- ============ INVITE TO WALK ============ -->
+    <section class="screen screen--invite" data-screen="invite">
+      <header class="topbar">
+        <button class="icon-btn" data-back aria-label="Volver">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <h2 class="topbar__title">Invitar a paseo</h2>
+        <span class="topbar__spacer"></span>
+      </header>
+ 
+      <div class="invite__body">
+        <div class="invite__who">
+          <div class="invite__avatar" style="background:linear-gradient(135deg,#F1C48A,#C06E52)">🐕</div>
+          <div>
+            <strong>Luna & Sofía</strong>
+            <p class="invite__sub">Palermo · 180 m</p>
+          </div>
+        </div>
+ 
+        <section class="invite__section">
+          <h3>¿Cuándo?</h3>
+          <div class="pill-row pill-row--wrap" data-group="when">
+            <button class="pill pill--choice">Hoy 18:00</button>
+            <button class="pill pill--choice is-active">Mañana 09:00</button>
+            <button class="pill pill--choice">Mañana 18:00</button>
+            <button class="pill pill--choice">Sábado 10:00</button>
+          </div>
+        </section>
+ 
+        <section class="invite__section">
+          <h3>¿Dónde?</h3>
+          <div class="place-list" data-group="where">
+            <button class="place is-active">
+              <span class="place__icon">🌳</span>
+              <div>
+                <strong>Parque Las Heras</strong>
+                <p>A 450 m · muy popular</p>
+              </div>
+              <span class="place__check">✓</span>
+            </button>
+            <button class="place">
+              <span class="place__icon">🌿</span>
+              <div>
+                <strong>Bosques de Palermo</strong>
+                <p>A 900 m · área canina</p>
+              </div>
+              <span class="place__check">✓</span>
+            </button>
+            <button class="place">
+              <span class="place__icon">🏞️</span>
+              <div>
+                <strong>Plaza Armenia</strong>
+                <p>A 1.2 km · tranquilo</p>
+              </div>
+              <span class="place__check">✓</span>
+            </button>
+          </div>
+        </section>
+ 
+        <section class="invite__section">
+          <h3>Mensaje (opcional)</h3>
+          <div class="input">¡Hola! ¿Les gustaría caminar con nosotros?</div>
+        </section>
+ 
+        <div class="invite__spacer"></div>
+      </div>
+ 
+      <div class="invite__cta">
+        <button class="btn btn--primary btn--block" data-go="success">Confirmar invitación</button>
+      </div>
+    </section>
+ 
+    <!-- ============ SUCCESS ============ -->
+    <section class="screen screen--success" data-screen="success">
+      <div class="success__inner">
+        <div class="success__icon">
+          <svg viewBox="0 0 64 64" width="56" height="56"><circle cx="32" cy="32" r="28" fill="#1F4D3F"/><path d="M20 33l8 8 16-18" stroke="#F5ECD9" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h2>¡Invitación enviada!</h2>
+        <p>Sofía recibirá tu mensaje. Te avisamos cuando confirme.</p>
+ 
+        <div class="success__card">
+          <div class="success__row">
+            <span>🐕 Con</span><strong>Luna & Sofía</strong>
+          </div>
+          <div class="success__row">
+            <span>📅 Cuándo</span><strong>Mañana, 09:00</strong>
+          </div>
+          <div class="success__row">
+            <span>📍 Dónde</span><strong>Parque Las Heras</strong>
+          </div>
+        </div>
+ 
+        <div class="success__actions">
+          <button class="btn btn--primary btn--block" data-go="chat">Abrir chat</button>
+          <button class="btn btn--ghost btn--block" data-go="home">Volver al mapa</button>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- ============ CHAT ============ -->
+    <section class="screen screen--chat" data-screen="chat">
+      <header class="topbar topbar--chat">
+        <button class="icon-btn" data-back aria-label="Volver">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="chat__peer">
+          <div class="chat__peer-avatar" style="background:linear-gradient(135deg,#F1C48A,#C06E52)">🐕</div>
+          <div>
+            <strong>Sofía & Luna</strong>
+            <p class="chat__peer-status">en línea · 180 m</p>
+          </div>
+        </div>
+        <button class="icon-btn" aria-label="Más">
+          <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/></svg>
+        </button>
+      </header>
+ 
+      <div class="chat__stream">
+        <div class="chat__day">Hoy</div>
+ 
+        <div class="bubble bubble--them">
+          <p>¡Hola! Vimos a Luna en el mapa 🐶</p>
+          <span class="bubble__time">14:02</span>
+        </div>
+ 
+        <div class="bubble bubble--me">
+          <p>¡Hola! Nosotros caminamos siempre por Las Heras a las 9.</p>
+          <span class="bubble__time">14:05</span>
+        </div>
+ 
+        <div class="bubble bubble--them">
+          <p>Buenísimo. ¿Mañana a las 9 nos juntamos ahí?</p>
+          <span class="bubble__time">14:06</span>
+        </div>
+ 
+        <div class="bubble bubble--invite">
+          <div class="bubble__card">
+            <strong>📍 Paseo propuesto</strong>
+            <p>Mañana · 09:00 · Parque Las Heras</p>
+            <div class="bubble__actions">
+              <button class="btn btn--mini btn--primary">Aceptar</button>
+              <button class="btn btn--mini btn--ghost">Reprogramar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="chat__composer">
+        <button class="icon-btn" aria-label="Adjuntar">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <div class="chat__input">Escribí un mensaje…</div>
+        <button class="icon-btn icon-btn--send" aria-label="Enviar">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 12l16-8-6 18-3-7-7-3z" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </section>
+ 
+    <!-- ============ FILTERS MODAL ============ -->
+    <div class="modal" data-modal="filters" aria-hidden="true">
+      <div class="modal__backdrop" data-close></div>
+      <div class="sheet">
+        <div class="sheet__handle"></div>
+        <header class="sheet__head">
+          <h3>Filtros</h3>
+          <button class="sheet__close" data-close aria-label="Cerrar">✕</button>
+        </header>
+ 
+        <section class="sheet__section">
+          <h4>Raza</h4>
+          <div class="pill-row pill-row--wrap">
+            <button class="pill pill--choice is-active">Todas</button>
+            <button class="pill pill--choice">Labrador</button>
+            <button class="pill pill--choice">Beagle</button>
+            <button class="pill pill--choice">Border Collie</button>
+            <button class="pill pill--choice">Golden</button>
+            <button class="pill pill--choice">Mestizo</button>
+          </div>
+        </section>
+ 
+        <section class="sheet__section">
+          <h4>Tamaño</h4>
+          <div class="pill-row">
+            <button class="pill pill--choice">Pequeño</button>
+            <button class="pill pill--choice is-active">Mediano</button>
+            <button class="pill pill--choice is-active">Grande</button>
+          </div>
+        </section>
+ 
+        <section class="sheet__section">
+          <h4>Energía</h4>
+          <div class="pill-row">
+            <button class="pill pill--choice">Tranquilo</button>
+            <button class="pill pill--choice is-active">Activo</button>
+            <button class="pill pill--choice">Muy activo</button>
+          </div>
+        </section>
+ 
+        <section class="sheet__section">
+          <h4>Ordenar</h4>
+          <div class="pill-row">
+            <button class="pill pill--choice is-active">Cerca</button>
+            <button class="pill pill--choice">Popular</button>
+            <button class="pill pill--choice">Nuevo</button>
+          </div>
+        </section>
+ 
+        <div class="sheet__cta">
+          <button class="btn btn--ghost btn--half" data-close>Limpiar</button>
+          <button class="btn btn--primary btn--half" data-close data-go="explore">Aplicar</button>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="home-indicator" aria-hidden="true"></div>
+  </div>
+ 
+<script src="app.js"></script>
+</body>
+</html>
